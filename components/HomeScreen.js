@@ -14,6 +14,10 @@ const HomeScreen = ({navigation}) => {
         <Text style={styles.appButtonText}>Edit Fingerprints</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={() => navigation.navigate('Robot')} style={styles.appButtonContainer}>
+        <Text style={styles.appButtonText}>Robot</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={() => navigation.navigate('Wifi')} style={styles.appButtonContainer}>
         <Text style={styles.appButtonText}>Wifi Scan</Text>
       </TouchableOpacity>

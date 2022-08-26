@@ -9,6 +9,8 @@ import {
   SafeAreaView, ScrollView, StatusBar
 } from 'react-native';
 
+import url from './globals';
+
 // import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { PermissionsAndroid } from 'react-native';
@@ -32,10 +34,8 @@ const Fingerprints = (props) => {
   // const offset = 260;
   const [rotation, setRotation] = useState(0);
   
-  // const [ws, setWs] = useState(new WebSocket('ws://192.168.1.42:8000/ws/graph/'));
 
-  // var ws = new WebSocket('ws://192.168.1.42:8000/ws/graph/');
-  var ws = useRef(new WebSocket('ws://192.168.1.42:8000/ws/graph/')).current;
+  var ws = useRef(new WebSocket('ws://'+ url +':8000/ws/browserWS/')).current;
   ws.onopen = () => {
     // connection opened
     
@@ -153,7 +153,8 @@ const Fingerprints = (props) => {
   }
 
   const getPins = () => {
-    fetch("http://192.168.1.42:8000/api/signalPoints/")
+    console.log("getting pins from:" + "http://"+ url +":8000/api/signalPoints/");
+    fetch("http://"+ url +":8000/api/signalPoints/")
     .then(resp => resp.json())
     .then(data => {
        // console.log(data)

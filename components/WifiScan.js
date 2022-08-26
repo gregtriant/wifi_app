@@ -35,8 +35,8 @@ const WifiScan = (props) => {
       } else {
         console.log('permition is not granted')
       }
-    
   }
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={scanWifi} style={styles.appButtonContainer}>

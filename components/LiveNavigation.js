@@ -125,7 +125,7 @@ class LiveNavigation extends Component {
     // this.state.ws.send(JSON.stringify(data)) // sending with socket did not work (database access was problematic) 
     
     // so we send it with a post Req
-    const res = await fetch('http://192.168.1.42:8000/localize/knn/', {
+    const res = await fetch('http://192.168.2.100:8000/localize/knn/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -167,7 +167,7 @@ class LiveNavigation extends Component {
   }
 
   getPins = () => {
-    fetch("http://192.168.1.42:8000/api/signalPoints/")
+    fetch("http://192.168.2.100:8000/api/signalPoints/")
     .then(resp => resp.json())
     .then(data => {
        // console.log(data)
@@ -213,7 +213,7 @@ class LiveNavigation extends Component {
             this.ws = ref
             this.state.ws = ref
           }}
-          url='ws://192.168.1.42:8000/ws/graph/'
+          url='ws://192.168.2.100:8000/ws/browserWS/'
           onOpen={() => {
             console.log('WS Connection Opened!')
             // let data = {
