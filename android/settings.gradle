@@ -1,4 +1,14 @@
 rootProject.name = 'WifiLocalization'
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
+include ':react-native-shake'
+project(':react-native-shake').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-shake/android')
+include ':react-native-accurate-step-counter'
+project(':react-native-accurate-step-counter').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-accurate-step-counter/android')
+include ':react-native-webview'
+project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
+include ':react-native-sensors'
+project(':react-native-sensors').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sensors/android')
 include ':react-native-wifi-reborn'
 project(':react-native-wifi-reborn').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wifi-reborn/android')
 include ':react-native-wifi-reborn'
@@ -17,3 +27,6 @@ if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true")
     include(":ReactAndroid")
     project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
 }
+
+apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle")
+useExpoModules()

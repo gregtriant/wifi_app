@@ -1,10 +1,25 @@
+require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '11.0'
+platform :ios, '12.0'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'WifiLocalization' do
+  use_expo_modules!
+  pod 'RNWalkCounter', :path => '../node_modules/react-native-accurate-step-counter'
+
+  pod 'react-native-shake', :path => '../node_modules/react-native-shake'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
+  end
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -22,6 +37,10 @@ target 'WifiLocalization' do
   pod 'react-native-compass-heading', :path => '../node_modules/react-native-compass-heading'
 
   pod 'RNWifi', :path => '../node_modules/react-native-wifi-reborn'
+
+  pod 'RNSensors', :path => '../node_modules/react-native-sensors'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
   target 'WifiLocalizationTests' do
     inherit! :complete

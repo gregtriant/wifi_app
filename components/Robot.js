@@ -7,6 +7,8 @@ import KeepAwake from 'react-native-keep-awake';
 import Sound from 'react-native-sound';
 Sound.setCategory('Playback');
 
+import { Accelerometer, Magnetometer, Gyroscope } from 'expo-sensors';
+
 import {
   StyleSheet,
   Text,
@@ -18,11 +20,14 @@ import {
 import { RNSerialport, definitions, actions } from "react-native-serialport";
 
 import url from './globals';
+import {saveFile, shareFile} from "./fileSaveAndShare";
 
 class Robot extends Component {
   constructor(props) {
     super(props);
-
+    // const [accelerometerData, setAccelerometerData] = useState({ x: 0, y: 0, z: 0 });
+    // const [magnetometerData, setMagnetometerData] = useState({ x: 0, y: 0, z: 0 });
+    // const [gyroscopeData, setGyroscopeData] = useState({ x: 0, y: 0, z: 0 });
     this.state = {
       // for the serial connection
       servisStarted: false,
@@ -51,13 +56,22 @@ class Robot extends Component {
       route_str: "2222222222222",
       skippedPoints: [],
 
-      totalScans: 40,
+      totalScans: 5,
       scansDone: 0,
       timeReached: "100321",
 
       wifis: [],
       scanning: false,
       timeToScan: 0,
+      
+      times: [],
+      accel: [],
+      mag: [],
+      gyro: [],
+      accelerometerData: { x: 0, y: 0, z: 0 },
+      magnetometerData: { x: 0, y: 0, z: 0 },
+      gyroscopeData: { x: 0, y: 0, z: 0 },
+
     };
 
     this.startUsbListener = this.startUsbListener.bind(this);
@@ -67,11 +81,42 @@ class Robot extends Component {
   componentDidMount() {
     this.startUsbListener();
     this.getRoutes();
+
+    // Accelerometer.addListener((data) => {
+    //   this.setState({
+    //     accelerometerData: data
+    //   })
+    //   // console.log(Date.now())
+    //   this.state.times.push(Date.now())
+    //   this.state.accel.push(this.state.accelerometerData);
+    //   // console.log(this.state.accelerometerData);
+    // });
+    // Magnetometer.addListener((data) => {
+    //   this.setState({
+    //     magnetometerData: data
+    //   })
+    //   this.state.mag.push(this.state.magnetometerData);
+    //   // console.log(this.state.magnetometerData);
+    // });
+    // Gyroscope.addListener((data) => {
+    //   this.setState({
+    //     gyroscopeData: data
+    //   })
+    //   this.state.gyro.push(this.state.gyroscopeData);
+    //   // console.log(this.state.gyroscopeData);
+    // });
+
+    // Accelerometer.setUpdateInterval(100);
+    // Magnetometer.setUpdateInterval(100);
+    // Gyroscope.setUpdateInterval(100);
     // KeepAwake.activate();
   }
 
   componentWillUnmount() {
     this.stopUsbListener();
+    // Accelerometer.removeAllListeners();
+    // Magnetometer.removeAllListeners();
+    // Gyroscope.removeAllListeners();
   }
 
   startUsbListener() {
@@ -490,6 +535,17 @@ class Robot extends Component {
       <View style={styles.container}>
         <KeepAwake />
         <View style={{flex:2}}>
+
+          {/* <TouchableOpacity style={styles.button} onPress={async () => {
+                                                              console.log('Button pressed');
+                                                              let fileuri = await saveFile(this.state.times, this.state.accel, this.state.mag, this.state.gyro);
+                                                              console.log(fileuri);
+                                                              let share = await shareFile(fileuri);
+                                                              console.log("share:", share); 
+                                                          }}>
+            <Text style={styles.buttonText}>Save Acc</Text>
+          </TouchableOpacity> */}
+
           <ScrollView
             ref={ref => {this.scrollView = ref}}
             onContentSizeChange={() => this.scrollView.scrollToEnd({animated: false})}
