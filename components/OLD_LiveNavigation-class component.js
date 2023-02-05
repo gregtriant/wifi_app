@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import url from './globals';
+import {url} from './globals';
 // import RNFS from 'react-native-fs';
 import { Accelerometer, Magnetometer, Gyroscope } from 'expo-sensors';
 

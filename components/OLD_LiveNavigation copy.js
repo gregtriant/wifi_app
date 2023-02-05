@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import url from './globals';
+import {url} from './globals';
 import { Accelerometer, Magnetometer, Gyroscope } from 'expo-sensors';
 
 import { 

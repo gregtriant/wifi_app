@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import { RNSerialport, definitions, actions } from "react-native-serialport";
 
-import url from './globals';
+import {url} from './globals';
 import {saveFile, shareFile} from "./fileSaveAndShare";
 
 class Robot extends Component {

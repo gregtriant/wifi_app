@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-import url from './globals';
+import {url} from './globals';
 
 Math.floor(600*0.773333)
 
@@ -33,7 +33,7 @@ const Fingerprints = (props) => {
   const [scanning, setScanning] = useState(false);
 
   const [touchPos, setTouchPos] = useState({x: 0, y: 0});
-  const [imageDims, setImageDims] = useState({width: 1, height: 1});
+  const [imageDims, setImageDims] = useState({width: 1, height: 1, x:0, y:0});
   const [compassHeading, setCompassHeading] = useState(0);
   // const offset = 260;
   const [rotation, setRotation] = useState(0);
@@ -117,11 +117,14 @@ const Fingerprints = (props) => {
 
   const handlePress = (evt) => {
     // console.log(evt.nativeEvent)
+    // console.log(imageDims)
+    const image_offset_x = imageDims.x;
+    const image_offset_y = imageDims.y;
     const w = imageDims.width;
     const h = imageDims.height;
 
-    let x = Math.floor(evt.nativeEvent.pageX); //locationX
-    let y = Math.floor(evt.nativeEvent.pageY - 118.48); //locationY To avoid the overlay of other icons on top of the floorplan layout
+    let x = Math.floor(evt.nativeEvent.pageX - image_offset_x); //locationX
+    let y = Math.floor(evt.nativeEvent.pageY - 118.48); // distance from top of screen to top of image)-118.48 locationY To avoid the overlay of other icons on top of the floorplan layout
     console.log("x:" + x + ", y:" + y);
     setTouchPos({
       x: x,
@@ -168,14 +171,16 @@ const Fingerprints = (props) => {
   }
 
   const find_dimesions = (layout) => {
-    // console.log(layout)
+    console.log("Image Layout:", layout)
     getRoutes();
     const {x, y, width, height} = layout;
     console.log("container width:", width);
     console.log("conteiner height:", height);
     setImageDims({
       width: width,
-      height: height 
+      height: height,
+      x,
+      y
     })
   }
 
