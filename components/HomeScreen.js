@@ -7,11 +7,11 @@ const HomeScreen = ({navigation}) => {
     <View style={styles.wrapper}>
 
       <TouchableOpacity onPress={() => navigation.navigate('LiveNav')} style={styles.appButtonContainer}>
-        <Text style={styles.appButtonText}>Live Navigation</Text>
+        <Text style={styles.appButtonText}>Localization</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Fingerprints')} style={styles.appButtonContainer}>
-        <Text style={styles.appButtonText}>Add Fingerprints</Text>
+        <Text style={styles.appButtonText}>Manual Collection</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Robot')} style={styles.appButtonContainer}>

@@ -18,8 +18,8 @@ const App = () => {
       <Stack.Navigator>
         {/* the first stack screen will be loaded first and will have all the buttons to navigate to the other screens */}
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
-        <Stack.Screen name="LiveNav" component={LiveNavigation} options={{ title: 'Live Nav' }} />
-        <Stack.Screen name="Fingerprints" component={Fingerprints} options={{ title: 'Edit FingerPrints' }} />
+        <Stack.Screen name="LiveNav" component={LiveNavigation} options={{ title: 'Localization' }} />
+        <Stack.Screen name="Fingerprints" component={Fingerprints} options={{ title: 'Manual Collection' }} />
         <Stack.Screen name="Robot" component={Robot} options={{ title: 'Robot' }} />
         {/* <Stack.Screen name="Location" component={LocationScreen} options={{ title: 'Location IMU' }} /> */}
         {/* <Stack.Screen name="Serial" component={AutoConnection} options={{ title: 'Serial Com' }} /> */}
